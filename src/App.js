@@ -13,54 +13,41 @@ function App() {
   useEffect(() => {
     rulebookService.getRulebookContent().then(res => {
       setRawText(res);
-      let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str))
-      let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
-      rulesEditedArr = rulesEditedArr.map(content => ({content}))
-      rulesEditedArr.forEach(element =>{
-        let chapterIndexSubstring = element.content.substring(0,3);
-        let ruleIndexSubstring = element.content.substring(0,6);
-        let ruleTextSubstring = element.content.substring(7);
-        element.chapterIndex = chapterIndexSubstring;
-        element.ruleText = ruleTextSubstring;
-        element.ruleIndex = ruleIndexSubstring;
-        delete element.content;
-        
-      })//
-      chaptersEditedArr = chaptersEditedArr.map(content => ({content}))
-      chaptersEditedArr.forEach(element =>{
-        let indexSubstring = element.content.substring(0,3);
-        let contentSubstring = element.content.substring(5);
-        element.chapterIndex = indexSubstring;
-        element.chapterDescription = contentSubstring;
-        delete element.content;
-        
-      })//
-        
-      console.log(chaptersEditedArr)
-      console.log(rulesEditedArr)
+      getRules();
+      getChapters();
 
     })
+    console.log(rules)
   }, [])
 
-  console.log(rawText)
-  //console.log(rawText)
-  const reducer = (str) => {
 
-  };
+  const getChapters = () => {
+    let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+    chaptersEditedArr = chaptersEditedArr.map(content => ({ content }))
+    chaptersEditedArr.forEach(element => {
+      let indexSubstring = element.content.substring(0, 3);
+      let contentSubstring = element.content.substring(5);
+      let chapterRules = rules.filter(rule => rule.ruleIndex.substring(0,3) === indexSubstring)
+      element.chapterIndex = indexSubstring;
+      element.chapterDescription = contentSubstring;
+      element.rules = chapterRules 
+      delete element.content;
+    })
 
-  const getRulebookChapters = () => {
-    let blah = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
-      blah = blah.map(content => ({content}))
-      blah.forEach(element =>{
-        let index = element.content.substring(0,3);
-        element.index = index;
-      })
-    setChapters(blah)
-
+    console.log(chaptersEditedArr)
   }
 
-  const getRulebookRules = () => {
-
+  const getRules = () => {
+    let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str))
+    rulesEditedArr = rulesEditedArr.map(content => ({ content }))
+    rulesEditedArr.forEach(element => {
+      let ruleIndexSubstring = element.content.substring(0, 6);
+      let ruleTextSubstring = element.content.substring(7);
+      element.ruleText = ruleTextSubstring;
+      element.ruleIndex = ruleIndexSubstring;
+      delete element.content;
+    })
+    setRules(rulesEditedArr);
   }
 
 
