@@ -13,12 +13,24 @@ function App() {
   useEffect(() => {
     rulebookService.getRulebookContent().then(res => {
       setRawText(res);
-      let blah = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
-      console.log(blah)
-      
+      let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str))
+      let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+      chaptersEditedArr = chaptersEditedArr.map(content => ({content}))
+      chaptersEditedArr.forEach(element =>{
+        let indexSubstring = element.content.substring(0,3);
+        let contentSubstring = element.content.substring(5);
+        element.index = indexSubstring;
+        element.content = contentSubstring;
+        
+      })//
+        
+      console.log(chaptersEditedArr)
+      console.log(rulesEditedArr)
+
     })
   }, [])
 
+  console.log(rawText)
   //console.log(rawText)
   const reducer = (str) => {
 
@@ -26,6 +38,12 @@ function App() {
 
   const getRulebookChapters = () => {
     let blah = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+      blah = blah.map(content => ({content}))
+      blah.forEach(element =>{
+        let index = element.content.substring(0,3);
+        element.index = index;
+      })
+    setChapters(blah)
 
   }
 
