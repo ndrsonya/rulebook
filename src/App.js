@@ -1,27 +1,38 @@
+import React, { useEffect, useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
-import rawText from './bookText.txt';
+import rulebookService from './services/rulebookContent'
 
-console.log(rawText);
 
 function App() {
 
-  let decodedText;
-  fetch(rawText)
-    .then(r => r.text())
-    .then(text => {
-      //console.log('text decoded:', text);
-      text = text
-        .replace(/\n\r/g, "\n")
-        .replace(/\r/g, "\n")
-        .split(/\n{2,}/g);
-    //  console.log(text); //3257
-      const distinctContent = [...new Set(text)]
-      //filter to have elements that starts with number
-      const result = distinctContent.filter(word => word.length > 6);
-      distinctContent.map(el => console.log(el))
-     //console.log(distinctContent); //3254
-    });
+  const [rawText, setRawText] = useState([]);
+  const [chapters, setChapters] = useState([]);
+  const [rules, setRules] = useState([]);
+
+  useEffect(() => {
+    rulebookService.getRulebookContent().then(res => {
+      setRawText(res);
+      let blah = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+      console.log(blah)
+      
+    })
+  }, [])
+
+  //console.log(rawText)
+  const reducer = (str) => {
+
+  };
+
+  const getRulebookChapters = () => {
+    let blah = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+
+  }
+
+  const getRulebookRules = () => {
+
+  }
+
 
 
 
