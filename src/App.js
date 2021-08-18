@@ -15,12 +15,24 @@ function App() {
       setRawText(res);
       let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str))
       let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
+      rulesEditedArr = rulesEditedArr.map(content => ({content}))
+      rulesEditedArr.forEach(element =>{
+        let chapterIndexSubstring = element.content.substring(0,3);
+        let ruleIndexSubstring = element.content.substring(0,6);
+        let ruleTextSubstring = element.content.substring(7);
+        element.chapterIndex = chapterIndexSubstring;
+        element.ruleText = ruleTextSubstring;
+        element.ruleIndex = ruleIndexSubstring;
+        delete element.content;
+        
+      })//
       chaptersEditedArr = chaptersEditedArr.map(content => ({content}))
       chaptersEditedArr.forEach(element =>{
         let indexSubstring = element.content.substring(0,3);
         let contentSubstring = element.content.substring(5);
-        element.index = indexSubstring;
-        element.content = contentSubstring;
+        element.chapterIndex = indexSubstring;
+        element.chapterDescription = contentSubstring;
+        delete element.content;
         
       })//
         
