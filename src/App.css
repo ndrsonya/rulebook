@@ -1,8 +1,17 @@
 .App {
   display: flex;
   flex-direction: row;
-
 }
+ .Header{
+  background-color: #273a59;
+  color: white;
+  
+ }
+
+ .Header h1 {
+   margin:0%;
+   padding: 14px;
+ }
 
 .LeftPart{
   width: 100%;
@@ -12,12 +21,13 @@
 }
 
 .RightPart{
+  align-items: flex-start;
   width: 100%;
-  flex-grow: 4;
+  flex-grow: 6;
 }
 
 .Link{
-  width: 80%;
+  width: 100%;
   background-color: #8697b5;
   color: white;
   padding: 14px;

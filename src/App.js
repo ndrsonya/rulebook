@@ -27,9 +27,13 @@ function App() {
 
   return (
 
-    <div className="App" >
+    <div>
+      <div className="Header">
+      <h1>Rulebook app</h1>
+      </div>
+      <div className="App">
       <div className="LeftPart">
-        <Link className="Link" to="/">home</Link>=
+        
         <Link className="Link" to={`${notes}`}>notes</Link>
 
 
@@ -37,8 +41,7 @@ function App() {
           chapters.map((el, index) => {
             return (
               <div key={index}>
-                <Link className="Link" to={`${el.chapterIndex}`}
-                >
+                <Link className="Link" to={`${el.chapterIndex}`}>
                   {el.chapterIndex} {el.chapterDescription}
                 </Link>
 
@@ -71,6 +74,7 @@ function App() {
           <h1>home</h1>
         </Route>
       </Switch>
+      </div>
     </div>
   );
 }
