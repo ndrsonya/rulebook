@@ -2,74 +2,70 @@ import React, { useEffect, useState } from 'react'
 import logo from './logo.svg';
 import './App.css';
 import rulebookService from './services/rulebookContent'
-
+import gettersService from './services/getters'
+import ChaptersList from './components/Chapters';
+import RulesList from './components/Rules';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useRouteMatch,
+  useHistory,
+} from "react-router-dom"
 
 function App() {
-
-  const [rawText, setRawText] = useState([]);
   const [chapters, setChapters] = useState([]);
-  const [rules, setRules] = useState([]);
-  const [formatedContent, setFormatedContent] = useState([]);
 
   useEffect(() => {
     rulebookService.getRulebookContent().then(res => {
-      setRawText(res);
-      getChapters();
-
+      const chaptersData = gettersService.getChapters(res);
+      setChapters(chaptersData)
     })
-    console.log(rules)
-    console.log(formatedContent)
-  }, [])
-
-  const getRules = () => {
-    let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str))
-    rulesEditedArr = rulesEditedArr.map(content => ({ content }))
-    rulesEditedArr.forEach(element => {
-      let ruleIndexSubstring = element.content.substring(0, 6);
-      let ruleTextSubstring = element.content.substring(7);
-      element.ruleText = ruleTextSubstring;
-      element.ruleIndex = ruleIndexSubstring;
-      delete element.content;
-    })
-    setRules(rulesEditedArr);
-  }
-  const getChapters = () => {
-    getRules();
-    let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str))
-    chaptersEditedArr = chaptersEditedArr.map(content => ({ content }))
-    chaptersEditedArr.forEach(element => {
-      let indexSubstring = element.content.substring(0, 3);
-      let contentSubstring = element.content.substring(5);
-      let chapterRules = rules.filter(rule => rule.ruleIndex.substring(0,3) === indexSubstring)
-      element.chapterIndex = indexSubstring;
-      element.chapterDescription = contentSubstring;
-      element.rules = chapterRules 
-      delete element.content;
-    })
-    setFormatedContent(chaptersEditedArr)
-  }
-
-
-
-
+  }, []);
+  let notes = 'notes';
+  console.log("chapter state")
+  console.log(chapters)
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+
+      <div>
+        <Link to="/">home</Link>
+        <br />
+        <Link to={`${notes}`}>notes</Link>
+        <br />
+        <Link to="/users">users</Link>
+
+        {
+          chapters.map((el, index) => {
+            return (
+              <div key={index}>
+                <Link to={`${el.chapterIndex}`}>lhkj{el.chapterIndex} {el.chapterDescription}</Link>
+              </div>
+            )
+
+          })
+        }
+      </div>
+
+      <Switch>
+        <Route path="/notes">
+          <h1>notes</h1>
+        </Route>
+        <Route path={`${notes}`}>
+          <h1>userss</h1>
+        </Route>
+        <Route path="/">
+          <h1>home</h1>
+        </Route>
+      </Switch>
+
+      <div>
+        <i>Note app, Department of Computer Science 2021</i>
+      </div>
+    </Router>
   );
 }
 

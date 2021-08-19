@@ -3,7 +3,7 @@
 const baseUrl = 'https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt'
 
 
-const getRulebookContent = async () => {
+async function getRulebookContent  ()  {
     const res = await fetch(baseUrl)
         .then(response => response.text())
         .then(text => {
