@@ -17,6 +17,7 @@ import {
 
 function App() {
   const [chapters, setChapters] = useState([]);
+  const [selectedChapter, setSelectedChapter] = useState();
 
   useEffect(() => {
     rulebookService.getRulebookContent().then(res => {
@@ -27,6 +28,12 @@ function App() {
   let notes = 'notes';
   console.log("chapter state")
   console.log(chapters)
+
+  const handleClick = (index) => {
+    setSelectedChapter(index);
+    console.log("I WORK")
+    console.log(index)
+  }
 
   return (
     <Router>
@@ -42,7 +49,14 @@ function App() {
           chapters.map((el, index) => {
             return (
               <div key={index}>
-                <Link to={`${el.chapterIndex}`}>lhkj{el.chapterIndex} {el.chapterDescription}</Link>
+
+                <Link
+                  to={`${el.chapterIndex}`}
+                  onClick={() => handleClick(el.chapterIndex)}
+                >
+                  {el.chapterIndex} {el.chapterDescription}
+                </Link>
+
               </div>
             )
 
@@ -54,9 +68,18 @@ function App() {
         <Route path="/notes">
           <h1>notes</h1>
         </Route>
-        <Route path={`${notes}`}>
-          <h1>userss</h1>
-        </Route>
+        {
+          chapters.map((el, index) => {
+            
+            return (
+              <Route key={index} path={`/${el.chapterIndex}`}>
+                <RulesList data = {el.rules}/>
+              </Route>
+            )
+          })
+
+        }
+        
         <Route path="/">
           <h1>home</h1>
         </Route>
