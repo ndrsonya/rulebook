@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: row;
 }
+
+*{
+  box-sizing: border-box;
+}
  .Header{
   background-color: #273a59;
   color: white;
@@ -14,6 +18,7 @@
  }
 
 .LeftPart{
+  flex-basis: 0;
   width: 100%;
   align-items: flex-start;
   text-align:left;
@@ -21,9 +26,14 @@
 }
 
 .RightPart{
+  flex-basis: 0;
   align-items: flex-start;
   width: 100%;
   flex-grow: 6;
+}
+
+.RightPart h2{
+  margin-left: ;
 }
 
 .Link{
