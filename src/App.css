@@ -23,6 +23,8 @@
   align-items: flex-start;
   text-align:left;
   flex-grow: 2;
+  overflow: scroll;
+  max-height: 3000px;
 }
 
 .RightPart{
@@ -30,10 +32,6 @@
   align-items: flex-start;
   width: 100%;
   flex-grow: 6;
-}
-
-.RightPart h2{
-  margin-left: ;
 }
 
 .Link{

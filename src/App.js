@@ -38,11 +38,9 @@ function App() {
           {
             chapters.map((el, index) => {
               return (
-                <div key={index}>
-                  <Link className="Link" to={`${el.chapterIndex}`}>
+                  <Link key={index} className="Link" to={`${el.chapterIndex}`}>
                     {el.chapterIndex} {el.chapterDescription}
                   </Link>
-                </div>
               )
             })
           }
@@ -55,7 +53,7 @@ function App() {
             chapters.map((el, index) => {
               return (
                 <Route key={index} path={`/${el.chapterIndex}`}>
-                    <RulesList className="RightPart" data={el.rules} chapterNumber={el.chapterIndex}/>
+                    <RulesList  data={el.rules} chapterNumber={el.chapterIndex}/>
                 </Route>
               )
             })

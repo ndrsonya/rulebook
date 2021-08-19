@@ -4,7 +4,7 @@ function RulesList(props) {
     const data = props.data;
     const chapterNumber = props.chapterNumber;
     return (
-        <div>
+        <div className="RightPart">
             <ul>
             <h2>Rules for the chapter {chapterNumber}: </h2>
                 {
