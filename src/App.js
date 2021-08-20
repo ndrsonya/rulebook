@@ -4,28 +4,16 @@ import rulebookService from './services/rulebookContent'
 import gettersService from './services/getters'
 import RulesList from './components/Rules';
 import Home from './components/Home';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom"
+import { BrowserRouter as Router,Switch,Route,Link } from "react-router-dom"
 
 function App() {
   const [chapters, setChapters] = useState([]);
-
-
   useEffect(() => {
     rulebookService.getRulebookContent().then(res => {
       const chaptersData = gettersService.getChapters(res);
       setChapters(chaptersData)
     })
   }, []);
-
-  console.log("chapter state")
-  console.log(chapters)
-
-
   return (
 
     <div>

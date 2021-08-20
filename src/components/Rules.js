@@ -1,4 +1,4 @@
-import Reacts, { useState } from 'react'
+import React, { useState } from 'react'
 
 function RulesList(props) {
     const data = props.data;
@@ -24,7 +24,7 @@ function RulesList(props) {
         <div className="RightPart">
             <ul>
                 <h2>Rules for the chapter {chapterNumber}. {chapterName}: </h2>
-                <p>Enter word to filter rules:</p>
+                <p>Type the keyword to filter the rules:</p>
                 <input
                     type='text'
                     className="textSearch"
@@ -35,7 +35,7 @@ function RulesList(props) {
                     className="button"
                     onClick={() => handleFiltering()}
                 >
-                    Search
+                    Filter
                 </button>
                 <button
                     className="button"
