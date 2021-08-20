@@ -1,6 +1,6 @@
 
 
-const baseUrl = 'https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt';
+const baseUrl = 'https://thawing-garden-65907.herokuapp.com/media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt';
 
 
 async function getRulebookContent  ()  {
