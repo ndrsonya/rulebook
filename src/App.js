@@ -53,7 +53,7 @@ function App() {
             chapters.map((el, index) => {
               return (
                 <Route key={index} path={`/${el.chapterIndex}`}>
-                    <RulesList  data={el.rules} chapterNumber={el.chapterIndex}/>
+                    <RulesList  data={el.rules} chapterNumber={el.chapterIndex} chapterName={el.chapterDescription} />
                 </Route>
               )
             })
