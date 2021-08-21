@@ -11,9 +11,8 @@ const getRules = (rawText) => {
 		element.ruleIndex = ruleIndexSubstring;
 		delete element.content;
 	});
-	console.log(rulesEditedArr)
 	return rulesEditedArr;
-}
+};
 
 // The function takes raw text, proceeds data and returns array of chapters
 const getChapters = (rawText) =>  {
@@ -34,6 +33,6 @@ const getChapters = (rawText) =>  {
 	});
 
 	return chaptersEditedArr;
-}
+};
 
 export default {getRules, getChapters};
