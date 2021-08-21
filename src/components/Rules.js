@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 
 function RulesList( props ) {
 
@@ -64,5 +65,12 @@ function RulesList( props ) {
 		</div>
 	);
 }
+
+RulesList.propTypes = {
+	data: PropTypes.array.isRequired,
+	chapterNumber: PropTypes.string.isRequired,
+	chapterName: PropTypes.string.isRequired,
+
+};
 
 export default RulesList;
