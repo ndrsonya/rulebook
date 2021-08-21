@@ -1,4 +1,4 @@
-.App {
+.Wrap {
   display: flex;
   flex-direction: row;
 }
@@ -6,10 +6,10 @@
 *{
   box-sizing: border-box;
 }
+
  .Header{
   background-color: #273a59;
   color: white;
-  
  }
 
  .Header h1 {
