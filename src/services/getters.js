@@ -1,5 +1,5 @@
 // The function takes raw text, proceeds data and returns array of rules
-const getRules = (rawText) => {
+function getRules(rawText) {
 
 	let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str));
 	rulesEditedArr = rulesEditedArr.map(content => ({ content }));
@@ -12,10 +12,10 @@ const getRules = (rawText) => {
 		delete element.content;
 	});
 	return rulesEditedArr;
-};
+}
 
 // The function takes raw text, proceeds data and returns array of chapters
-const getChapters = (rawText) =>  {
+function getChapters(rawText) {
 
 	let rules = getRules(rawText);
 	let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str));
@@ -33,6 +33,6 @@ const getChapters = (rawText) =>  {
 	});
 
 	return chaptersEditedArr;
-};
+}
 
-export default {getRules, getChapters};
+export default { getRules, getChapters };
