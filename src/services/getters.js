@@ -1,12 +1,15 @@
 // The function takes raw text, proceeds data and returns array of rules
 function getRules(rawText) {
-
-	let rulesEditedArr = rawText.filter(str => /^[0-9]{3}\.\d/.test(str));
-	rulesEditedArr = rulesEditedArr.map(content => ({ content }));
-
+	// every rule starts with 3 numbers, dot and a digit
+	// we select only strings that start with this pattern
+	const pattern = /^[0-9]{3}\.\d/;
+	const rulesEditedArr = rawText
+		.filter(str => pattern
+			.test(str))
+		.map(content => ({ content }));
 	rulesEditedArr.forEach(element => {
-		let ruleIndexSubstring = element.content.substring(0, 6);
-		let ruleTextSubstring = element.content.substring(7);
+		const ruleIndexSubstring = element.content.substring(0, 6);
+		const ruleTextSubstring = element.content.substring(7);
 		element.ruleText = ruleTextSubstring;
 		element.ruleIndex = ruleIndexSubstring;
 		delete element.content;
@@ -16,16 +19,19 @@ function getRules(rawText) {
 
 // The function takes raw text, proceeds data and returns array of chapters
 function getChapters(rawText) {
-
-	let rules = getRules(rawText);
-	let chaptersEditedArr = rawText.filter(str => /^[0-9]{3}\.\s/.test(str));
-
-	chaptersEditedArr = chaptersEditedArr.map(content => ({ content }));
-
+	// every chapter starts with 3 numbers, dot and a whitespace
+	// we select only strings that start with this pattern
+	const pattern = /^[0-9]{3}\.\s/;
+	const rules = getRules(rawText);
+	const chaptersEditedArr = rawText
+		.filter(str => pattern
+			.test(str))
+		.map(content => ({ content })
+		);
 	chaptersEditedArr.forEach(element => {
-		let indexSubstring = element.content.substring(0, 3);
-		let contentSubstring = element.content.substring(5);
-		let chapterRules = rules.filter(rule => rule.ruleIndex.substring(0, 3) === indexSubstring);
+		const indexSubstring = element.content.substring(0, 3);
+		const contentSubstring = element.content.substring(5);
+		const chapterRules = rules.filter(rule => rule.ruleIndex.substring(0, 3) === indexSubstring);
 		element.chapterIndex = indexSubstring;
 		element.chapterDescription = contentSubstring;
 		element.rules = chapterRules;
