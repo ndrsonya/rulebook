@@ -1,5 +1,6 @@
 # Rulebook app
-
+## Description
+The app fetches data from the text file https://media.wizards.com/2021/downloads/MagicCompRules%2020210419.txt and parses it to display the list of chapters, if the chapter selectd the rules that belong to this chapter should be displayed beside.
 Link to the live app: https://rulebook-sa.herokuapp.com/ 
 (it might take some time to load the web page as the app fals asleep if nobody visits the wibsite for more that one hour)
 
