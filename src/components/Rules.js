@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-function RulesList( props ) {
-
+function RulesList(props) {
 	const data = props.data;
 	const chapterNumber = props.chapterNumber;
 	const chapterName = props.chapterName;
@@ -20,15 +19,18 @@ function RulesList( props ) {
 	};
 
 	const handleFiltering = () => {
-		let updatedArr = data.filter(el => el.ruleText.includes(searchWord));
+		let updatedArr = data
+			.filter(el =>
+				el.ruleText
+					.toUpperCase()
+					.includes(searchWord
+						.toUpperCase()));
 		setFilteredList(updatedArr);
 	};
 
 	return (
 		<div className="RightPart">
-
 			<ul>
-				
 				<h2>Rules for the chapter {chapterNumber}. {chapterName}: </h2>
 				<p>Type the keyword to filter the rules:</p>
 				<input
@@ -42,15 +44,14 @@ function RulesList( props ) {
 					className="button"
 					onClick={() => handleFiltering()}
 				>
-                    Filter
+					Filter
 				</button>
 				<button
 					className="button"
 					onClick={() => clearSearchField()}
 				>
-                    Clear
+					Clear
 				</button>
-
 				{
 					filteredList.map((el, index) => {
 						return (
@@ -60,7 +61,6 @@ function RulesList( props ) {
 						);
 					})
 				}
-
 			</ul>
 		</div>
 	);
